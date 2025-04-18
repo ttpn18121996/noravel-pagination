@@ -1,0 +1,37 @@
+{
+  "name": "@noravel/pagination",
+  "version": "1.0.0",
+  "description": "This is a support library for my personal projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ttpn18121996/noravel-pagination.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --verbose --coverage",
+    "prettier:check": "prettier --ignore-path .prettierignore --check '**/*.{js,ts,json,md}'",
+    "prettier:fix": "prettier --ignore-path .prettierignore --write '**/*.{js,ts,json,md}'"
+  },
+  "files": [
+    "dist"
+  ],
+  "prepare": "npm run build",
+  "keywords": [
+    "noravel",
+    "pagination"
+  ],
+  "author": "Trịnh Trần Phương Nam <ttpn18121996@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.14",
+    "jest": "^29.7",
+    "prettier": "^3.5",
+    "typescript": "^5.8"
+  },
+  "dependencies": {
+    "@noravel/supporter": "^2.1"
+  }
+}
