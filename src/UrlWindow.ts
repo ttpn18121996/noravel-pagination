@@ -48,7 +48,7 @@ export default class UrlWindow {
    */
   public getUrlSlider(onEachSide: number) {
     const window = onEachSide + 4;
-    const total = this.paginator.total;
+    const total = this.paginator.lastPage;
     const currentPage: number = this.paginator.currentPage;
 
     if (total <= 1) {

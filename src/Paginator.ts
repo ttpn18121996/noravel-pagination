@@ -17,13 +17,13 @@ export const initOptions: PaginatorOptions = {
 
 export default abstract class Paginator {
   private static options: PaginatorOptions = { ...initOptions };
+  public items: any[] = [];
   public path: string;
   public pageName: string;
   public currentPage: number;
 
   public constructor(
-    public items: any[],
-    public perPage: number,
+    public perPage: number = 10,
     currentPage: number = 1,
   ) {
     this.path = Paginator.getOptions('path') ?? '/';
@@ -58,7 +58,7 @@ export default abstract class Paginator {
    * @returns {number}
    */
   public firstItem(): number {
-    return this.items.length > 0 ? this.perPage * (this.currentPage - 1) : 0;
+    return this.items.length > 0 ? this.perPage * (this.currentPage - 1) + 1 : 1;
   }
 
   /**
@@ -67,7 +67,7 @@ export default abstract class Paginator {
    * @returns {number}
    */
   public lastItem(): number {
-    return this.items.length > 0 ? this.perPage * this.currentPage : 0;
+    return this.items.length > 0 ? this.perPage * this.currentPage : 1;
   }
 
   /**

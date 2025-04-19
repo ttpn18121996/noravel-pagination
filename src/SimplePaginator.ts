@@ -1,7 +1,16 @@
 import Paginator from './Paginator';
 
 export default class SimplePaginator extends Paginator {
-  protected hasMore: boolean = false;
+  public hasMore: boolean = false;
+
+  constructor(
+    items: any[],
+    public perPage: number = 10,
+    currentPage: number = 1,
+  ) {
+    super(perPage, currentPage);
+    this.setItems(items);
+  }
 
   /**
    * Set the items for the paginator.
@@ -11,6 +20,7 @@ export default class SimplePaginator extends Paginator {
    */
   public setItems(items: any[]) {
     this.hasMore = items.length > this.perPage;
+
     if (items.length > this.perPage) {
       this.items = items.slice(this.currentPage * this.perPage - this.perPage, this.currentPage * this.perPage);
     } else {

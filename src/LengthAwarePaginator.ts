@@ -8,16 +8,16 @@ export type UrlRange = {
 };
 
 export default class LengthAwarePaginator extends Paginator {
-  public onEachSide: number = 1;
+  public onEachSide: number = 2;
   public lastPage: number = 1;
 
   public constructor(
     items: any[],
     public total: number = 0,
-    public perPage: number,
+    public perPage: number = 10,
     currentPage: number = 1,
   ) {
-    super(items, perPage, currentPage);
+    super(perPage, currentPage);
     this.lastPage = Math.ceil(total / perPage);
     this.setItems(items);
   }
@@ -106,12 +106,15 @@ export default class LengthAwarePaginator extends Paginator {
       data: this.items,
       first_page_url: this.url(1),
       from: this.firstItem(),
+      last_page: this.lastPage,
+      last_page_url: this.url(this.lastPage),
+      links: this.elements(),
       next_page_url: this.nextPageUrl(),
       path: this.path,
       per_page: this.perPage,
       prev_page_url: this.previousPageUrl(),
       to: this.lastItem(),
-      elements: this.elements(),
+      total: this.total,
     };
   }
 }
