@@ -1,5 +1,5 @@
 import Paginator from './Paginator';
-import {Pagination} from './types/Pagiantion';
+import { Pagination } from './types/Pagiantion';
 
 export default class SimplePaginator extends Paginator {
   public hasMore: boolean = false;

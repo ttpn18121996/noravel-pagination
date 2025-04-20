@@ -1,4 +1,4 @@
-import {Pagination} from './Pagiantion';
+import { Pagination } from './Pagiantion';
 
 export type UrlRange = {
   page: number;
