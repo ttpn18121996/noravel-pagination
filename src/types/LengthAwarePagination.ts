@@ -3,6 +3,7 @@ import { Pagination } from './Pagiantion';
 export type UrlRange = {
   page: number;
   url: string;
+  active?: boolean;
 };
 
 export interface LengthAwarePagination<T> extends Pagination<T> {
