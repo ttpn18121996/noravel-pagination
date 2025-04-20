@@ -1,11 +1,7 @@
 import { _arr } from '@noravel/supporter';
 import Paginator from './Paginator';
 import UrlWindow from './UrlWindow';
-
-export type UrlRange = {
-  page: number;
-  url: string;
-};
+import { LengthAwarePagination, UrlRange } from './types/LengthAwarePagination';
 
 export default class LengthAwarePaginator extends Paginator {
   public onEachSide: number = 2;
@@ -98,9 +94,9 @@ export default class LengthAwarePaginator extends Paginator {
   /**
    * Get the JSON representation of the paginator.
    *
-   * @returns {Record<string, unknown>}
+   * @returns {LengthAwarePagination<T>}
    */
-  public jsonSerialize(): Record<string, unknown> {
+  public jsonSerialize<T>(): LengthAwarePagination<T> {
     return {
       current_page: this.currentPage,
       data: this.items,

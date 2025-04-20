@@ -51,7 +51,7 @@ export default abstract class Paginator {
    *
    * @returns {Record<string, unknown>}
    */
-  abstract jsonSerialize(): Record<string, unknown>;
+  abstract jsonSerialize<T>(): unknown;
 
   /**
    * Get the ordinal number of the first element of the current page.

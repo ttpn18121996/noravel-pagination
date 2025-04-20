@@ -1,5 +1,6 @@
 import { _arr } from '@noravel/supporter';
-import LengthAwarePaginator, { UrlRange } from './LengthAwarePaginator';
+import { UrlRange } from './types/LengthAwarePagination';
+import LengthAwarePaginator from './LengthAwarePaginator';
 
 export default class UrlWindow {
   public first: UrlRange[] | null = null;
