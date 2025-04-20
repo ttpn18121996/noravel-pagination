@@ -1,0 +1,28 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+      - 'main'
+      - 'releases/**'
+  push:
+    branches:
+      - 'master'
+      - 'main'
+      - 'releases/**'
+
+jobs:
+  test_features:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install npm dependencies
+      run: npm ci && npm run build
+    
+    - name: Run jest
+      run: npm run test

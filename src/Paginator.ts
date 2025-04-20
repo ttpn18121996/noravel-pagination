@@ -3,14 +3,15 @@ import { _obj, _str } from '@noravel/supporter';
 export type PaginatorOptions = {
   path?: string;
   baseUrl?: string;
-  query?: any;
+  query?: Record<string, unknown>;
   fragment?: any;
   pageName?: string;
 };
 
 export const initOptions: PaginatorOptions = {
   path: '/',
-  query: null,
+  baseUrl: '',
+  query: {},
   fragment: null,
   pageName: 'page',
 };
@@ -111,7 +112,7 @@ export default abstract class Paginator {
 
     return _str(this.path)
       .prepend(base)
-      .append(_obj.toQueryString({ [this.pageName]: page }))
+      .append(_obj.toQueryString({ ...Paginator.getOptions('query'), [this.pageName]: page }))
       .toString();
   }
 
