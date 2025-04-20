@@ -1,4 +1,5 @@
 import Paginator from './Paginator';
+import { Pagination } from './types/Pagiantion';
 
 export default class SimplePaginator extends Paginator {
   public hasMore: boolean = false;
@@ -40,9 +41,9 @@ export default class SimplePaginator extends Paginator {
   /**
    * Get the JSON representation of the paginator.
    *
-   * @returns {Record<string, unknown>}
+   * @returns {Pagination<T>}
    */
-  public jsonSerialize(): Record<string, unknown> {
+  public jsonSerialize<T>(): Pagination<T> {
     return {
       current_page: this.currentPage,
       data: this.items,

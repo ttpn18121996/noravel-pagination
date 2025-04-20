@@ -1,6 +1,6 @@
 {
   "name": "@noravel/pagination",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a support library for my personal projects.",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:coverage": "jest --verbose --coverage",
     "prettier:check": "prettier --ignore-path .prettierignore --check '**/*.{js,ts,json,md}'",
     "prettier:fix": "prettier --ignore-path .prettierignore --write '**/*.{js,ts,json,md}'"
