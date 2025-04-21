@@ -1,4 +1,4 @@
 import { LengthAwarePagination, UrlRange } from './LengthAwarePagination';
-import { Pagination } from './Pagiantion';
+import { Pagination, PaginatorOptions } from './Pagiantion';
 
-export { Pagination, LengthAwarePagination, UrlRange };
+export { Pagination, PaginatorOptions, LengthAwarePagination, UrlRange };

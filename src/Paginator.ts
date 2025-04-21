@@ -1,12 +1,5 @@
 import { _obj, _str } from '@noravel/supporter';
-
-export type PaginatorOptions = {
-  path?: string;
-  baseUrl?: string;
-  query?: Record<string, unknown>;
-  fragment?: any;
-  pageName?: string;
-};
+import { PaginatorOptions } from './types/Pagiantion';
 
 export const initOptions: PaginatorOptions = {
   path: '/',
