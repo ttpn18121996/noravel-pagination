@@ -1,11 +1,11 @@
 import Paginator from './Paginator';
 import { Pagination } from './types/Pagiantion';
 
-export default class SimplePaginator extends Paginator {
+export default class SimplePaginator<T = any> extends Paginator {
   public hasMore: boolean = false;
 
   constructor(
-    items: any[],
+    items: T[],
     public perPage: number = 10,
     currentPage: number = 1,
   ) {
@@ -16,10 +16,10 @@ export default class SimplePaginator extends Paginator {
   /**
    * Set the items for the paginator.
    *
-   * @param {any[]} items The items to set.
+   * @param {T[]} items The items to set.
    * @returns {void}
    */
-  public setItems(items: any[]) {
+  public setItems(items: T[]) {
     this.hasMore = items.length > this.perPage;
 
     if (items.length > this.perPage) {
@@ -43,7 +43,7 @@ export default class SimplePaginator extends Paginator {
    *
    * @returns {Pagination<T>}
    */
-  public jsonSerialize<T>(): Pagination<T> {
+  public jsonSerialize(): Pagination<T> {
     return {
       current_page: this.currentPage,
       data: this.items,

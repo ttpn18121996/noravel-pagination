@@ -16,9 +16,9 @@ export const initOptions: PaginatorOptions = {
   pageName: 'page',
 };
 
-export default abstract class Paginator {
+export default abstract class Paginator<T = any> {
   private static options: PaginatorOptions = { ...initOptions };
-  public items: any[] = [];
+  public items: T[] = [];
   public path: string;
   public pageName: string;
   public currentPage: number;
@@ -35,9 +35,9 @@ export default abstract class Paginator {
   /**
    * Set the items for the paginator.
    *
-   * @param {any[]} items The items to set.
+   * @param {T[]} items The items to set.
    */
-  abstract setItems(items: any[]): void;
+  abstract setItems(items: T[]): void;
 
   /**
    * Determine if the paginator has more pages.
@@ -51,7 +51,7 @@ export default abstract class Paginator {
    *
    * @returns {Record<string, unknown>}
    */
-  abstract jsonSerialize<T>(): unknown;
+  abstract jsonSerialize(): unknown;
 
   /**
    * Get the ordinal number of the first element of the current page.

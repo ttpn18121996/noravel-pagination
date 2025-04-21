@@ -3,12 +3,12 @@ import Paginator from './Paginator';
 import UrlWindow from './UrlWindow';
 import { LengthAwarePagination, UrlRange } from './types/LengthAwarePagination';
 
-export default class LengthAwarePaginator extends Paginator {
+export default class LengthAwarePaginator<T = any> extends Paginator {
   public onEachSide: number = 2;
   public lastPage: number = 1;
 
   public constructor(
-    items: any[],
+    items: T[],
     public total: number = 0,
     public perPage: number = 10,
     currentPage: number = 1,
@@ -21,10 +21,10 @@ export default class LengthAwarePaginator extends Paginator {
   /**
    * Set the items for the paginator.
    *
-   * @param {any[]} items The items to set.
+   * @param {T[]} items The items to set.
    * @returns {void}
    */
-  public setItems(items: any[]): void {
+  public setItems(items: T[]): void {
     if (items.length > this.perPage) {
       this.items = items.slice(this.currentPage * this.perPage - this.perPage, this.currentPage * this.perPage);
     } else {
@@ -96,7 +96,7 @@ export default class LengthAwarePaginator extends Paginator {
    *
    * @returns {LengthAwarePagination<T>}
    */
-  public jsonSerialize<T>(): LengthAwarePagination<T> {
+  public jsonSerialize(): LengthAwarePagination<T> {
     return {
       current_page: this.currentPage,
       data: this.items,
