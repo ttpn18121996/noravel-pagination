@@ -11,9 +11,7 @@ test('it can create a paginator', () => {
 describe('it can json serialize', () => {
   test('with current page in first side', () => {
     const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    Paginator.setOptions({
-      baseUrl: 'http://localhost',
-    });
+    Paginator.setBaseUrl('http://localhost');
 
     const paginator = new LengthAwarePaginator(items, 20);
 
@@ -46,9 +44,7 @@ describe('it can json serialize', () => {
       60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87,
       88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
     ];
-    Paginator.setOptions({
-      baseUrl: 'http://localhost',
-    });
+    Paginator.setBaseUrl('http://localhost');
 
     const paginator = new LengthAwarePaginator(items, 100, 5, 10);
 
@@ -91,9 +87,7 @@ describe('it can json serialize', () => {
     const items = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
     ];
-    Paginator.setOptions({
-      baseUrl: 'http://localhost',
-    });
+    Paginator.setBaseUrl('http://localhost');
 
     const paginator = new LengthAwarePaginator(items, 30, 2, 15);
 
@@ -134,10 +128,9 @@ describe('it can json serialize', () => {
 test('it can covert to json', () => {
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const paginator = new LengthAwarePaginator(items, 10);
-  Paginator.resetOptions();
 
   expect(paginator.toJson()).toEqual(
-    '{"current_page":1,"data":[1,2,3,4,5,6,7,8,9,10],"first_page_url":"/?page=1","from":1,"last_page":1,"last_page_url":"/?page=1","links":[],"next_page_url":null,"path":"/","per_page":10,"prev_page_url":null,"to":10,"total":10}',
+    '{"current_page":1,"data":[1,2,3,4,5,6,7,8,9,10],"first_page_url":"http://localhost/?page=1","from":1,"last_page":1,"last_page_url":"http://localhost/?page=1","links":[],"next_page_url":null,"path":"/","per_page":10,"prev_page_url":null,"to":10,"total":10}',
   );
 });
 
@@ -148,9 +141,7 @@ test('it can set onEachSide', () => {
     61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
     90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
   ];
-  Paginator.setOptions({
-    baseUrl: 'http://localhost',
-  });
+  Paginator.setBaseUrl('http://localhost');
 
   const paginator = new LengthAwarePaginator(items, 100, 5, 10);
 
@@ -221,4 +212,34 @@ test('it can set onEachSide', () => {
     to: 50,
     total: 100,
   });
+});
+
+test('it can set onEachSide', () => {
+  const items = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+    61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+    90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
+  ];
+  Paginator.setBaseUrl('http://localhost');
+
+  const paginator = new LengthAwarePaginator(items, 100, 5, 10);
+
+  expect(paginator.setOnEachSide(1).jsonSerialize().links).toEqual([
+    [
+      { page: 1, url: 'http://localhost/?page=1', active: false },
+      { page: 2, url: 'http://localhost/?page=2', active: false },
+    ],
+    '...',
+    [
+      { page: 9, url: 'http://localhost/?page=9', active: false },
+      { page: 10, url: 'http://localhost/?page=10', active: true },
+      { page: 11, url: 'http://localhost/?page=11', active: false },
+    ],
+    '...',
+    [
+      { page: 19, url: 'http://localhost/?page=19', active: false },
+      { page: 20, url: 'http://localhost/?page=20', active: false },
+    ],
+  ]);
 });

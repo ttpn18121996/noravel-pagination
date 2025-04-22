@@ -9,3 +9,10 @@ export interface Pagination<T> {
   prev_page_url: string | null;
   to: number;
 }
+
+export type PaginatorOptions = {
+  path?: string;
+  query?: Record<string, unknown>;
+  fragment?: any;
+  pageName?: string;
+};

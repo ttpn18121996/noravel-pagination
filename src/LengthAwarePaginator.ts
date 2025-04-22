@@ -2,18 +2,20 @@ import { _arr } from '@noravel/supporter';
 import Paginator from './Paginator';
 import UrlWindow from './UrlWindow';
 import { LengthAwarePagination, UrlRange } from './types/LengthAwarePagination';
+import { PaginatorOptions } from './types';
 
-export default class LengthAwarePaginator extends Paginator {
+export default class LengthAwarePaginator<T = any> extends Paginator {
   public onEachSide: number = 2;
   public lastPage: number = 1;
 
   public constructor(
-    items: any[],
+    items: T[],
     public total: number = 0,
     public perPage: number = 10,
     currentPage: number = 1,
+    options?: PaginatorOptions,
   ) {
-    super(perPage, currentPage);
+    super(perPage, currentPage, options);
     this.lastPage = Math.ceil(total / perPage);
     this.setItems(items);
   }
@@ -21,10 +23,10 @@ export default class LengthAwarePaginator extends Paginator {
   /**
    * Set the items for the paginator.
    *
-   * @param {any[]} items The items to set.
+   * @param {T[]} items The items to set.
    * @returns {void}
    */
-  public setItems(items: any[]): void {
+  public setItems(items: T[]): void {
     if (items.length > this.perPage) {
       this.items = items.slice(this.currentPage * this.perPage - this.perPage, this.currentPage * this.perPage);
     } else {
@@ -36,10 +38,11 @@ export default class LengthAwarePaginator extends Paginator {
    * Set the number of items to show on each side.
    *
    * @param {number} value The number of items to show on each side.
-   * @returns {void}
+   * @returns {this}
    */
-  public setOnEachSide(value: number) {
+  public setOnEachSide(value: number): this {
     this.onEachSide = value;
+    return this;
   }
 
   /**
@@ -96,7 +99,7 @@ export default class LengthAwarePaginator extends Paginator {
    *
    * @returns {LengthAwarePagination<T>}
    */
-  public jsonSerialize<T>(): LengthAwarePagination<T> {
+  public jsonSerialize(): LengthAwarePagination<T> {
     return {
       current_page: this.currentPage,
       data: this.items,
