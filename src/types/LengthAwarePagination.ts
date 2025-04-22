@@ -9,6 +9,6 @@ export type UrlRange = {
 export interface LengthAwarePagination<T> extends Pagination<T> {
   last_page: number;
   last_page_url: string | null;
-  links: (string | UrlRange[])[];
+  links: string | UrlRange[];
   total: number;
 }
