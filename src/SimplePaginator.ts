@@ -1,5 +1,5 @@
 import Paginator from './Paginator';
-import { Pagination } from './types/Pagiantion';
+import { Pagination, PaginatorOptions } from './types/Pagiantion';
 
 export default class SimplePaginator<T = any> extends Paginator {
   public hasMore: boolean = false;
@@ -8,8 +8,9 @@ export default class SimplePaginator<T = any> extends Paginator {
     items: T[],
     public perPage: number = 10,
     currentPage: number = 1,
+    options?: PaginatorOptions,
   ) {
-    super(perPage, currentPage);
+    super(perPage, currentPage, options);
     this.setItems(items);
   }
 

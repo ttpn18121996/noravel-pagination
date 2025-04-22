@@ -2,6 +2,7 @@ import { _arr } from '@noravel/supporter';
 import Paginator from './Paginator';
 import UrlWindow from './UrlWindow';
 import { LengthAwarePagination, UrlRange } from './types/LengthAwarePagination';
+import { PaginatorOptions } from './types';
 
 export default class LengthAwarePaginator<T = any> extends Paginator {
   public onEachSide: number = 2;
@@ -12,8 +13,9 @@ export default class LengthAwarePaginator<T = any> extends Paginator {
     public total: number = 0,
     public perPage: number = 10,
     currentPage: number = 1,
+    options?: PaginatorOptions,
   ) {
-    super(perPage, currentPage);
+    super(perPage, currentPage, options);
     this.lastPage = Math.ceil(total / perPage);
     this.setItems(items);
   }
@@ -36,10 +38,11 @@ export default class LengthAwarePaginator<T = any> extends Paginator {
    * Set the number of items to show on each side.
    *
    * @param {number} value The number of items to show on each side.
-   * @returns {void}
+   * @returns {this}
    */
-  public setOnEachSide(value: number) {
+  public setOnEachSide(value: number): this {
     this.onEachSide = value;
+    return this;
   }
 
   /**

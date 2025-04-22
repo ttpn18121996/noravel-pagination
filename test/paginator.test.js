@@ -1,36 +1,39 @@
-const { LengthAwarePaginator, Paginator } = require('../dist/index');
+const { Paginator, LengthAwarePaginator } = require('../dist/index');
+
+test('it can set base URL', () => {
+  Paginator.setBaseUrl('http://localhost');
+
+  expect(Paginator.getBaseUrl()).toEqual('http://localhost');
+});
 
 test('it can set options', () => {
-  Paginator.setOptions({
-    baseUrl: 'http://localhost',
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const paginator = new LengthAwarePaginator(items, 20);
+  Paginator.setBaseUrl('http://localhost');
+
+  paginator.setOptions({
+    path: '/test',
+    query: { keyword: 'test' },
+    fragment: 'test',
+    pageName: 'p',
   });
 
-  expect(Paginator.options.baseUrl).toEqual('http://localhost');
+  expect(paginator.url(2)).toEqual('http://localhost/test?keyword=test&p=2#test');
 });
 
 test('it can reset options', () => {
-  Paginator.setOptions({
-    baseUrl: 'http://example.com',
-    path: '/products',
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const paginator = new LengthAwarePaginator(items, 20);
+  Paginator.setBaseUrl('http://localhost');
+
+  paginator.setOptions({
+    path: '/test',
     query: { keyword: 'test' },
+    fragment: 'test',
     pageName: 'p',
   });
 
-  expect(Paginator.getOptions()).toEqual({
-    baseUrl: 'http://example.com',
-    path: '/products',
-    query: { keyword: 'test' },
-    pageName: 'p',
-    fragment: null,
-  });
+  paginator.resetOptions();
 
-  Paginator.resetOptions();
-
-  expect(Paginator.getOptions()).toEqual({
-    path: '/',
-    baseUrl: '',
-    query: {},
-    pageName: 'page',
-    fragment: null,
-  });
+  expect(paginator.url(2)).toEqual('http://localhost/?page=2');
 });

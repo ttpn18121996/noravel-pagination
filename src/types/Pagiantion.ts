@@ -12,7 +12,6 @@ export interface Pagination<T> {
 
 export type PaginatorOptions = {
   path?: string;
-  baseUrl?: string;
   query?: Record<string, unknown>;
   fragment?: any;
   pageName?: string;

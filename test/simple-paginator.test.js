@@ -11,9 +11,7 @@ test('it can create a paginator', () => {
 describe('it can json serialize', () => {
   test('with current page in first page', () => {
     const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    Paginator.setOptions({
-      baseUrl: 'http://localhost',
-    });
+    Paginator.setBaseUrl('http://localhost');
 
     const paginator = new SimplePaginator(items, 10);
 
@@ -32,9 +30,7 @@ describe('it can json serialize', () => {
 
   test('with current page in second page', () => {
     const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    Paginator.setOptions({
-      baseUrl: 'http://localhost',
-    });
+    Paginator.setBaseUrl('http://localhost');
 
     const paginator = new SimplePaginator(items, 10, 2);
 
