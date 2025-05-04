@@ -1,8 +1,8 @@
 import { Pagination } from './Pagiantion';
 
 export type UrlRange = {
-  page: number;
-  url: string;
+  label: string;
+  url: string | null;
   active?: boolean;
 };
 

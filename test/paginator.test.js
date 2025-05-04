@@ -37,3 +37,11 @@ test('it can reset options', () => {
 
   expect(paginator.url(2)).toEqual('http://localhost/?page=2');
 });
+
+test('it can covert to string', () => {
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const paginator = new LengthAwarePaginator(items, 20);
+  Paginator.setBaseUrl('http://localhost');
+
+  expect(paginator.toString()).toEqual(JSON.stringify(paginator.jsonSerialize()));
+});
