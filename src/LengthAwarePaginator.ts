@@ -1,4 +1,4 @@
-import { _arr } from '@noravel/supporter';
+import { _arr, typeOf } from '@noravel/supporter';
 import Paginator from './Paginator';
 import UrlWindow from './UrlWindow';
 import { LengthAwarePagination, UrlRange } from './types/LengthAwarePagination';
@@ -87,7 +87,7 @@ export default class LengthAwarePaginator<T = any> extends Paginator {
       .range(start, end)
       .map(page => {
         return {
-          page,
+          label: `${page}`,
           url: this.url(page),
           active: page == this.currentPage,
         };
@@ -107,7 +107,13 @@ export default class LengthAwarePaginator<T = any> extends Paginator {
       from: this.firstItem(),
       last_page: this.lastPage,
       last_page_url: this.url(this.lastPage),
-      links: this.elements(),
+      links: _arr(this.elements()).reduce((pre: UrlRange[], cur: string | UrlRange[]) => {
+        if (typeOf(cur) === 'string') {
+          return [...pre, { label: cur, url: null, active: false }];
+        }
+
+        return [...pre, ...cur];
+      }, [] as UrlRange[]),
       next_page_url: this.nextPageUrl(),
       path: this.path,
       per_page: this.perPage,
@@ -115,5 +121,19 @@ export default class LengthAwarePaginator<T = any> extends Paginator {
       to: this.lastItem(),
       total: this.total,
     };
+  }
+
+  /**
+   * Get the URL for a given page.
+   *
+   * @param {number} page The page number.
+   * @returns {string}
+   */
+  public url(page: number): string {
+    if (this.lastPage < page) {
+      page = this.lastPage;
+    }
+
+    return super.url(page);
   }
 }

@@ -8,6 +8,8 @@ This is a support library for Nam's projects.
 - [Usage](#usage)
   - [SimplePaginator](#simplepaginator)
   - [LengthAwarePaginator](#lengthawarepaginator)
+  - [Adjusting the Pagination Link Window](#adjusting-the-pagination-link-window)
+- [Configuration](#configuration)
 
 ## Installation
 
@@ -40,17 +42,13 @@ console.log(paginator.jsonSerialize());
     last_page: 20,
     last_page_url: '/?page=20',
     links: [
-        [
-            { page: 1, url: '/?page=1', active: true },
-            { page: 2, url: '/?page=2', active: false },
-            { page: 3, url: '/?page=3', active: false },
-            { page: 4, url: '/?page=4', active: false },
-        ],
-        '...',
-        [
-            { page: 19, url: '/?page=19', active: false },
-            { page: 20, url: '/?page=20', active: false },
-        ],
+      { page: '1', url: '/?page=1', active: true },
+      { page: '2', url: '/?page=2', active: false },
+      { page: '3', url: '/?page=3', active: false },
+      { page: '4', url: '/?page=4', active: false },
+      { page: '...', url: null, active: false } ,
+      { page: '19', url: '/?page=19', active: false },
+      { page: '20', url: '/?page=20', active: false },
     ],
     next_page_url: '/?page=2',
     path: '/',
@@ -147,23 +145,17 @@ console.log(paginator.jsonSerialize());
     last_page: 20,
     last_page_url: '/?page=20',
     links: [
-        [
-            { page: 1, url: '/?page=1', active: false },
-            { page: 2, url: '/?page=2', active: false },
-        ],
-        '...',
-        [
-            { page: 5, url: '/?page=5', active: false },
-            { page: 6, url: '/?page=6', active: false },
-            { page: 7, url: '/?page=7', active: true },
-            { page: 8, url: '/?page=8', active: false },
-            { page: 9, url: '/?page=9', active: false },
-        ],
-        '...',
-        [
-            { page: 19, url: '/?page=19', active: false },
-            { page: 20, url: '/?page=20', active: false },
-        ],
+      { page: '1', url: '/?page=1', active: false },
+      { page: '2', url: '/?page=2', active: false },
+      { page: '...', url: null, active: false },
+      { page: '5', url: '/?page=5', active: false },
+      { page: '6', url: '/?page=6', active: false },
+      { page: '7', url: '/?page=7', active: true },
+      { page: '8', url: '/?page=8', active: false },
+      { page: '9', url: '/?page=9', active: false },
+      { page: '...', url: null, active: false },
+      { page: '19', url: '/?page=19', active: false },
+      { page: '20', url: '/?page=20', active: false },
     ],
     next_page_url: '/?page=8',
     path: '/',
@@ -207,21 +199,15 @@ console.log(paginator.jsonSerialize());
     last_page: 20,
     last_page_url: '/?page=20',
     links: [
-        [
-            { page: 1, url: '/?page=1', active: false },
-            { page: 2, url: '/?page=2', active: false },
-        ],
-        '...',
-        [
-            { page: 6, url: '/?page=6', active: false },
-            { page: 7, url: '/?page=7', active: true },
-            { page: 8, url: '/?page=8', active: false },
-        ],
-        '...',
-        [
-            { page: 19, url: '/?page=19', active: false },
-            { page: 20, url: '/?page=20', active: false },
-        ],
+      { page: '1', url: '/?page=1', active: false },
+      { page: '2', url: '/?page=2', active: false },
+      { page: '...', url: null, active: false },
+      { page: '6', url: '/?page=6', active: false },
+      { page: '7', url: '/?page=7', active: true },
+      { page: '8', url: '/?page=8', active: false },
+      { page: '...', url: null, active: false },
+      { page: '19', url: '/?page=19', active: false },
+      { page: '20', url: '/?page=20', active: false },
     ],
     next_page_url: '/?page=8',
     path: '/',
